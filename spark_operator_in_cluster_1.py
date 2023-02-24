@@ -23,36 +23,7 @@ dag = DAG(
 spark_operator = SparkKubernetesOperator(
     task_id='spark_pi_submit',
     namespace='operators',
-    application_yaml = """
-apiVersion: "sparkoperator.k8s.io/v1beta2"
-kind: SparkApplication
-metadata:
-  name: k8s-spark-pi
-spec:
-  sparkConfigMap: configmap-spark-config
-  type: Scala
-  mode: cluster
-  image: "gcr.io/spark-operator/spark:v3.1.1"
-  imagePullPolicy: Always
-  mainClass: org.apache.spark.examples.SparkPi
-  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.12-3.1.1.jar"
-  sparkVersion: "3.1.1"
-  restartPolicy:
-    type: OnFailure
-  driver:
-    cores: 1
-    coreLimit: "1200m"
-    memory: "512m"
-    labels:
-      version: 3.1.1
-    serviceAccount: spark-pi
-  executor:
-    cores: 1
-    instances: 1
-    memory: "512m"
-    labels:
-      version: 3.1.1
-"""
+    application_file="spark_application_1.yaml",
     kubernetes_conn_id="kubernetes_default",
     dag=dag,
     api_group="sparkoperator.k8s.io"
