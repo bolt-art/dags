@@ -25,7 +25,6 @@ spark_operator = SparkKubernetesOperator(
     namespace='operators',
     application_file="spark_application_1.yaml",
     kubernetes_conn_id='kubernetes_target',
-    service_account_name='airflow-cluster',
     dag=dag,
     api_group='sparkoperator.k8s.io'
 )
