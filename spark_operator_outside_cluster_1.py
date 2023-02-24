@@ -23,10 +23,10 @@ dag = DAG(
 spark_operator = SparkKubernetesOperator(
     task_id='spark_pi_submit',
     namespace='operators',
-    application_file="spark_application_1.yaml",
-    kubernetes_conn_id="kubernetes_target",
+    application_file='spark_application_1.yaml',
+    kubernetes_conn_id='kubernetes_target',
     dag=dag,
-    api_group="sparkoperator.k8s.io"
+    api_group='sparkoperator.k8s.io'
 )
 start = DummyOperator(task_id="start", dag=dag)
 end = DummyOperator(task_id="end", dag=dag)
