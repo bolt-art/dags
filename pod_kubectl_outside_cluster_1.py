@@ -31,7 +31,7 @@ start_pod = KubernetesPodOperator(
     in_cluster=False,
     task_id="start-kubectl-pod",
     get_logs=True,
-    kubernetes_conn_id="kubernetes_target",
+    config_file="/usr/local/k8s/config",
     dag=dag
 )
 start = DummyOperator(task_id="start", dag=dag)
