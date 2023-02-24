@@ -4,7 +4,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.providers.cncf.kubernetes.operators.spark_kubernetes import SparkKubernetesOperator
 from airflow.utils.dates import days_ago
 default_args = {
-    'owner': 'airflow',
+    'owner': 'spark-operator',
     'depends_on_past': False,
     'start_date': days_ago(1),
     'email': ['airflow@example.com'],
