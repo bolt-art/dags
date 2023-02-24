@@ -29,10 +29,9 @@ start_pod = KubernetesPodOperator(
     do_xcom_push=False,
     is_delete_operator_pod=True,
     in_cluster=False,
-    cluster_context='/usr/local/k8s/config',
     task_id="start-kubectl-pod",
     get_logs=True,
-    kubernetes_conn_id="kubernetes_default",
+    kubernetes_conn_id="kubernetes_target",
     dag=dag
 )
 start = DummyOperator(task_id="start", dag=dag)
