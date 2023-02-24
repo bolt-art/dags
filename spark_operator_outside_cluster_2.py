@@ -14,7 +14,7 @@ default_args = {
     'retries': 0
 }
 dag = DAG(
-    dag_id="spark_operator_outside_cluster",
+    dag_id="spark_operator_outside_cluster_2",
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     tags=['pod','outside','spark-operator'],
