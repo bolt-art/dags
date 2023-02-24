@@ -43,15 +43,11 @@ spec:
     cores: 1
     coreLimit: "1200m"
     memory: "512m"
-    labels:
-      version: 3.1.1
     serviceAccount: spark-pi
   executor:
     cores: 1
     instances: 1
     memory: "512m"
-    labels:
-      version: 3.1.1
 """,
     kubernetes_conn_id='kubernetes_target',
     dag=dag,
