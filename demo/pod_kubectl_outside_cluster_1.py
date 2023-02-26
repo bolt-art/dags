@@ -4,8 +4,6 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import Kubernete
 from datetime import datetime, timedelta
 from airflow.utils.dates import days_ago
 now = datetime.now()
-import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/usr/local/google/service_account.json"
 default_args = {
     "owner": "k8s-kubectl",
     "depends_on_past": False,
@@ -32,6 +30,7 @@ start_pod = KubernetesPodOperator(
     is_delete_operator_pod=True,
     task_id="start-kubectl-pod",
     get_logs=True,
+    kubernetes_conn_id="kubernetes_target",
     dag=dag
 )
 start = DummyOperator(task_id="start", dag=dag)
