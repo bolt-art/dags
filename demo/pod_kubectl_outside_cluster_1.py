@@ -4,6 +4,7 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import Kubernete
 from datetime import datetime, timedelta
 from airflow.utils.dates import days_ago
 now = datetime.now()
+import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/usr/local/google/service_account.json"
 default_args = {
     "owner": "k8s-kubectl",
