@@ -20,6 +20,7 @@ dag = DAG(
     tags=['pod','outside','spark-operator'],
     template_searchpath=["/usr/local/spark/spark-operator/"]
 )
+IMPERSONATION_CHAIN = "airflow-identity@artur-bolt-development.iam.gserviceaccount.com"
 spark_operator = SparkKubernetesOperator(
     task_id='spark_pi_submit',
     namespace='operators',
