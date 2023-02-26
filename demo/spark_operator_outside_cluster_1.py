@@ -27,7 +27,8 @@ spark_operator = SparkKubernetesOperator(
     application_file="spark_application_1.yaml",
     #kubernetes_conn_id='kubernetes_target',
     dag=dag,
-    api_group='sparkoperator.k8s.io'
+    api_group='sparkoperator.k8s.io',
+    impersonation_chain=IMPERSONATION_CHAIN
 )
 start = DummyOperator(task_id="start", dag=dag)
 end = DummyOperator(task_id="end", dag=dag)
