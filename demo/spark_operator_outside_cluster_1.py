@@ -24,7 +24,7 @@ spark_operator = SparkKubernetesOperator(
     task_id='spark_pi_submit',
     namespace='operators',
     application_file="spark_application_1.yaml",
-    #kubernetes_conn_id='kubernetes_target',
+    kubernetes_conn_id='google_cloud_default',
     dag=dag,
     api_group='sparkoperator.k8s.io'
 )
