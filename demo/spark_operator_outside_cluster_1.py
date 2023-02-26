@@ -3,7 +3,6 @@ from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.providers.cncf.kubernetes.operators.spark_kubernetes import SparkKubernetesOperator
 from airflow.utils.dates import days_ago
-GOOGLE_APPLICATION_CREDENTIALS="/usr/local/google/service_account.json"
 default_args = {
     'owner': 'spark-operator',
     'depends_on_past': False,
