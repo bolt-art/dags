@@ -30,7 +30,9 @@ start_pod = KubernetesPodOperator(
     is_delete_operator_pod=True,
     task_id="start-kubectl-pod",
     get_logs=True,
-    kubernetes_conn_id="google_cloud_default",
+    env_vars={
+        "GOOGLE_APPLICATION_CREDENTIALS": "/usr/local/google/service_account.json",
+    },
     dag=dag
 )
 start = DummyOperator(task_id="start", dag=dag)
