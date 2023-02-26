@@ -30,7 +30,7 @@ start_pod = KubernetesPodOperator(
     is_delete_operator_pod=True,
     task_id="start-kubectl-pod",
     get_logs=True,
-    kubernetes_conn_id="kubernetes_target",
+    kubernetes_conn_id="google_cloud_default",
     dag=dag
 )
 start = DummyOperator(task_id="start", dag=dag)
