@@ -40,7 +40,9 @@ start_pod = GKEStartPodOperator(
     cluster_name="k8s-development",
     in_cluster=False,
     project_id="artur-bolt-development",
-    gcp_conn_id='google_cloud_default',
-    dag=dag
+    dag=dag,
+    env_vars={
+        "GOOGLE_APPLICATION_CREDENTIALS": "/usr/local/google/service_account.json",
+    }
 )
 start_pod
