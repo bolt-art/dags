@@ -21,14 +21,14 @@ dag = DAG(
         schedule_interval=timedelta(days=1),
         tags=['pod','outside','bitnami']
     )
-gcp_hook = GoogleCloudBaseHook(gcp_conn_id='google_cloud_sa')
-credentials = service_account.Credentials.from_service_account_file(
-    '/usr/local/google/service_account.json',
-    scopes=['https://www.googleapis.com/auth/cloud-platform']
-)
-delegated_credentials = credentials.with_subject('airflow-identity@artur-bolt-development.iam.gserviceaccount.com')
+# gcp_hook = GoogleCloudBaseHook(gcp_conn_id='google_cloud_sa')
+# credentials = service_account.Credentials.from_service_account_file(
+#     '/usr/local/google/service_account.json',
+#     scopes=['https://www.googleapis.com/auth/cloud-platform']
+# )
+# delegated_credentials = credentials.with_subject('airflow-identity@artur-bolt-development.iam.gserviceaccount.com')
 start_pod = GKEStartPodOperator(
-    namespace="oeprators",
+    namespace="operators",
     image="bitnami/kubectl",
     cmds=["sh", "-c", "kubectl exec -ti --namespace operators spark-master-0 -- spark-submit --master spark://spark-master-svc.operators.svc.cluster.local:7077 --class org.apache.spark.examples.SparkPi https://artur-bolt-spark-jars.s3.eu-central-1.amazonaws.com/spark-examples_2.12-3.3.2.jar 1000"],
     name="kubectl-pod",
@@ -40,8 +40,7 @@ start_pod = GKEStartPodOperator(
     cluster_name="k8s-development",
     in_cluster=False,
     project_id="artur-bolt-development",
-    gcp_conn_id='google_cloud_default',
-    impersonation_chain='airflow-identity@artur-bolt-development.iam.gserviceaccount.com',
+    gcp_conn_id='google_cloud_sa',
     dag=dag
 )
 start_pod
