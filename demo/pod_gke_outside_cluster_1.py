@@ -36,7 +36,7 @@ start_pod = GKEPodOperator(
     project_id='artur-bolt-development',
     location="europe-central2",
     cluster_name='target-double',
-    gcp_conn_id='google_cloud_default',
+    gcp_conn_id='google_cloud_sa',
     dag=dag
 )
 start_pod
