@@ -37,9 +37,6 @@ start_pod = GKEPodOperator(
     location="europe-central2",
     cluster_name='target-double',
     gcp_conn_id='google_cloud_default',
-    delegate_to=None,
-    service_account_email=delegated_credentials.service_account_email,
-    extra_envs={"GOOGLE_APPLICATION_CREDENTIALS": "/usr/local/google/service_account.json"},
-    dag=dag,
+    dag=dag
 )
 start_pod
