@@ -1,8 +1,7 @@
 from datetime import timedelta, datetime
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
 from airflow.providers.cncf.kubernetes.operators.spark_kubernetes import SparkKubernetesOperator
-from airflow.providers.cncf.kubernetes.sensors.spark_kubernetes import 
+from airflow.providers.cncf.kubernetes.sensors.spark_kubernetes import SparkKubernetesSensor
 from airflow.utils.dates import days_ago
 default_args = {
     'owner': 'spark-operator',
@@ -38,6 +37,4 @@ sensor = SparkKubernetesSensor(
     api_group="parkoperator.k8s.io",
     attach_log=True
 )
-start = DummyOperator(task_id="start", dag=dag)
-end = DummyOperator(task_id="end", dag=dag)
-start >> spark_operator >> sensor >> end
+spark_operator >> sensor
