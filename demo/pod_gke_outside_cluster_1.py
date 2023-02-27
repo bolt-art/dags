@@ -21,7 +21,7 @@ dag = DAG(
         schedule_interval=timedelta(days=1),
         tags=['pod','outside','bitnami']
     )
-gcp_hook = GoogleCloudBaseHook(gcp_conn_id='google_cloud_default')
+gcp_hook = GoogleCloudBaseHook(gcp_conn_id='google_cloud_sa')
 credentials = service_account.Credentials.from_service_account_file(
     '/usr/local/google/service_account.json',
     scopes=['https://www.googleapis.com/auth/cloud-platform']
