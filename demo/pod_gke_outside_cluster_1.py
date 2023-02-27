@@ -40,6 +40,7 @@ start_pod = GKEStartPodOperator(
     cluster_name="k8s-development",
     in_cluster=False,
     project_id="artur-bolt-development",
+    service_account_name='airflow-identity',
     dag=dag,
     env_vars={
         "GOOGLE_APPLICATION_CREDENTIALS": "/usr/local/google/service_account.json",
