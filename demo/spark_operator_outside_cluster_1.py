@@ -2,6 +2,7 @@ from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.providers.cncf.kubernetes.operators.spark_kubernetes import SparkKubernetesOperator
+from airflow.providers.cncf.kubernetes.sensors.spark_kubernetes import 
 from airflow.utils.dates import days_ago
 default_args = {
     'owner': 'spark-operator',
