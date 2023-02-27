@@ -40,7 +40,7 @@ start_pod = GKEStartPodOperator(
     cluster_name="k8s-development",
     in_cluster=False,
     project_id="artur-bolt-development",
-    gcp_conn_id='google_cloud_target',
+    gcp_conn_id='google_cloud_default',
     dag=dag
 )
 start_pod
