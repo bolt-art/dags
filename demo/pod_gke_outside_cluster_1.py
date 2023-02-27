@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.providers.google.cloud.operators.kubernetes_engine import GKEStartPodOperator
+from airflow.providers.google.cloud.operators.container import GKEPodOperator
 from airflow.contrib.hooks.gcp_api_base_hook import GoogleCloudBaseHook
 from google.oauth2 import service_account
 from datetime import datetime, timedelta
