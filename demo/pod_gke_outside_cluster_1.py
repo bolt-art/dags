@@ -27,20 +27,19 @@ credentials = service_account.Credentials.from_service_account_file(
     scopes=['https://www.googleapis.com/auth/cloud-platform']
 )
 delegated_credentials = credentials.with_subject('airflow-identity@artur-bolt-development.iam.gserviceaccount.com')
-start_pod = GKEStartPodOperator(
+start_pod = GKEPodOperator(
     namespace="operators",
     image="bitnami/kubectl",
     cmds=["sh", "-c", "kubectl exec -ti --namespace operators spark-master-0 -- spark-submit --master spark://spark-master-svc.operators.svc.cluster.local:7077 --class org.apache.spark.examples.SparkPi https://artur-bolt-spark-jars.s3.eu-central-1.amazonaws.com/spark-examples_2.12-3.3.2.jar 1000"],
     name="kubectl-pod",
-    do_xcom_push=False,
-    is_delete_operator_pod=True,
-    task_id="start-kubectl-pod",
-    get_logs=True,        
+    task_id='start-kubectl-pod',
+    project_id='artur-bolt-development',
     location="europe-central2",
-    cluster_name="k8s-development",
-    in_cluster=False,
-    project_id="artur-bolt-development",
+    cluster_name='target-double',
+    gcp_conn_id='google_cloud_default',
+    delegate_to=None,
+    service_account_email=delegated_credentials.service_account_email,
+    extra_envs={"GOOGLE_APPLICATION_CREDENTIALS": "/usr/local/google/service_account.json"},
     dag=dag,
-    delegate=delegated_credentials,
-    gcp_conn_id='google_cloud_default'
 )
+start_pod
