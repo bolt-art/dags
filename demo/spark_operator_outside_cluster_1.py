@@ -34,7 +34,7 @@ sensor = SparkKubernetesSensor(
     application_name="{{ task_instance.xcom_pull(task_ids='spark_pi_submit')['metadata']['name'] }}",
     kubernetes_conn_id="kubernetes_target",
     dag=dag,
-    api_group="parkoperator.k8s.io",
+    api_group="sparkoperator.k8s.io",
     attach_log=True
 )
 spark_operator >> sensor
