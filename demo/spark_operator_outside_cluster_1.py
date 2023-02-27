@@ -28,6 +28,15 @@ spark_operator = SparkKubernetesOperator(
     dag=dag,
     api_group='sparkoperator.k8s.io'
 )
+sensor = SparkKubernetesSensor(
+    task_id='spark_pi_submit_sensor',
+    namespace="operators",
+    application_name="{{ task_instance.xcom_pull(task_ids='spark_pi_submit')['metadata']['name'] }}",
+    kubernetes_conn_id="kubernetes_target",
+    dag=dag,
+    api_group="parkoperator.k8s.io",
+    attach_log=True
+)
 start = DummyOperator(task_id="start", dag=dag)
 end = DummyOperator(task_id="end", dag=dag)
-start >> spark_operator >> end
+start >> spark_operator >> sensor >> end
