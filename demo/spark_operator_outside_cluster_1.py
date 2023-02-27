@@ -33,7 +33,6 @@ spark_operator = SparkKubernetesOperator(
     namespace='operators',
     application_file="spark_application_1.yaml",
     gcp_conn_id='kubernetes_target',
-    delegate=delegated_credentials,
     dag=dag,
     api_group='sparkoperator.k8s.io'
 )
@@ -42,7 +41,6 @@ sensor = SparkKubernetesSensor(
     namespace="operators",
     application_name="{{ task_instance.xcom_pull(task_ids='spark_pi_submit')['metadata']['name'] }}",
     gcp_conn_id="kubernetes_target",
-    delegate=delegated_credentials,
     dag=dag,
     api_group="sparkoperator.k8s.io",
     attach_log=True
