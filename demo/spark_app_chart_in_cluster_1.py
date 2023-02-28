@@ -25,19 +25,7 @@ start_pod = KubernetesPodOperator(
     name="deploy_helm_pod",
     namespace="operators",
     image="alpine/helm",
-    cmds=[
-        - helm
-        - repo
-        - add
-        - bitnami
-        - https://charts.bitnami.com/bitnami
-        - &&
-        - helm
-        - upgrade
-        - --install
-        - tomcat
-        - bitnami/tomcat
-    ],
+    cmds=["helm", "repo", "add", "bitnami", "https://charts.bitnami.com/bitnami", "&&", "helm", "upgrade", "--install", "tomcat", "bitnami/tomcat"],
     service_account_name="airflow-identity",
     do_xcom_push=False,
     is_delete_operator_pod=True,
